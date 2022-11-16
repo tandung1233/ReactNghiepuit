@@ -5,6 +5,10 @@ class App extends Component {
   onClick() {
     console.log("Đây là component");
   }
+  //Sử dụng ref gọi ra để sử dụng lấy giá trị nơi ô input á củng dễ
+  onAddProduct = () => {
+    console.log(this.refs.name.value);
+  };
   render() {
     var product = [
       {
@@ -52,6 +56,16 @@ class App extends Component {
     });
     return (
       <div className="container">
+        <h2>Thêm sản phẩm</h2>
+        <label>Tên sản phẩm</label>
+        <input type="text" className="form-control" ref="name" />
+        <button
+          type="submit"
+          className="btn btn-primary"
+          onClick={this.onAddProduct}
+        >
+          Lưu
+        </button>
         <div className="row">
           {/* Truyền các dữ liệu cha xuống con rồi cái con gọi lại bằng thuộc tính props.name,.. */}
           {element}
