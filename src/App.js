@@ -1,84 +1,69 @@
 import "./App.css";
-import { Component } from "react";
-import Header from "./Component/Header";
 import Product from "./Component/Product";
+import { Component } from "react";
 class App extends Component {
-  //Tạo cái hàm này để in ra nếu status là true
-  showInfoProduct(product) {
-    if (product.status) {
-      return (
-        <h1>
-          id: {product.id}
-          name: {product.name}
-          price: {product.price}
-          Status: {product.status ? "Active" : "Pending"}
-        </h1>
-      );
-    }
+  onClick() {
+    console.log("Đây là component");
   }
   render() {
-    let a = 51;
-    let product = {
-      id: 1,
-      name: "Iphone 7 plus",
-      price: 15000000,
-      status: true,
-    };
-    var users = [
+    var product = [
       {
         id: 1,
-        name: "Nguyen van A",
-        age: 18,
+        name: "Iphone 6 Plus",
+        price: 16000000,
+        image: "https://www.bootdey.com/img/Content/avatar/avatar7.png",
+        status: true,
       },
       {
         id: 2,
-        name: "Nguyen van C",
-        age: 18,
+        name: "Iphone 10 Plus",
+        price: 10000000,
+        image: "https://www.bootdey.com/img/Content/avatar/avatar7.png",
+        status: true,
+      },
+      {
+        id: 2,
+        name: "Iphone 3 Plus",
+        price: 13000000,
+        image: "https://www.bootdey.com/img/Content/avatar/avatar7.png",
+        status: false,
       },
       {
         id: 3,
-        name: "Nguyen van B",
-        age: 18,
+        name: "Iphone 2 Plus",
+        price: 12000000,
+        image: "https://www.bootdey.com/img/Content/avatar/avatar7.png",
+        status: false,
       },
     ];
-    //củng dễ sử dụng map rồi in ra giá trị nó thôi
-    var elements = users.map((user, index) => {
-      return (
-        <div key={users.id}>
-          <h2> Tên: {user.name} </h2>
-          <h2> Tuổi: {user.age}</h2>
-        </div>
-      );
+    let element = product.map((product, intdex) => {
+      if (product.status === true)
+        return (
+          <Product
+            key={product.id}
+            name={product.name}
+            price={product.price}
+            image={product.image}
+          ></Product>
+        );
+      else {
+        return "";
+      }
     });
     return (
-      //Còn bthuong thì rất là chuối React.createElement
-      //Đang sử dụng JSX
-      <>
-        <div className="App">
-          <h1 className="text-primary">App Component</h1>
-          <Header />
-          <Product />
+      <div className="container">
+        <div className="row">
+          {/* Truyền các dữ liệu cha xuống con rồi cái con gọi lại bằng thuộc tính props.name,.. */}
+          {element}
         </div>
-        <nav
-          className="navbar navbar-default navbar-static-top"
-          role="navigation"
+        <button
+          type="button"
+          className="btn btn-warning"
+          onClick={this.onClick}
         >
-          <a className="navbar-brand" href="#/">
-            Title
-          </a>
-          <ul className="nav navbar-nav">
-            <li className="active">
-              <a href="#/">Home</a>
-            </li>
-            <li>
-              <a href="#/">Link {a}</a>
-            </li>
-          </ul>
-        </nav>
-        {/* Khi gọi thì nhớ cho vào cặp ngoặc và sử dụng this để nó biết lấy hàm hiện tại */}
-        {this.showInfoProduct(product)}
-        {elements}
-      </>
+          Click me
+        </button>
+      </div>
     );
   }
 }
